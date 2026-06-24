@@ -93,11 +93,6 @@ class ConnectTab(QWidget):
         self._method_combo = QComboBox()
         for m in ConnectMethod:
             self._method_combo.addItem(m.value, m)
-        # Default to SSH Key
-        ssh_key_index = next(
-            (i for i, m in enumerate(ConnectMethod) if m == ConnectMethod.SSH_KEY), 0
-        )
-        self._method_combo.setCurrentIndex(ssh_key_index)
         self._method_combo.currentIndexChanged.connect(self._on_method_changed)
         method_row.addWidget(self._method_combo)
         method_row.addStretch()
@@ -151,6 +146,12 @@ class ConnectTab(QWidget):
 
         cred_layout.addWidget(self._cred_stack)
         root.addWidget(cred_group)
+
+        # Default to SSH Key now that the stack is fully built
+        ssh_key_index = next(
+            (i for i, m in enumerate(ConnectMethod) if m == ConnectMethod.SSH_KEY), 0
+        )
+        self._method_combo.setCurrentIndex(ssh_key_index)
 
         # ── Connect button ────────────────────────────────────────────────────
         btn_row = QHBoxLayout()
