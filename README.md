@@ -170,10 +170,18 @@ Full technical reference covering every tab, field, and generated command:
 
 ## Lab Environment Reference
 
-
+| Item | Value |
+|------|-------|
+| Management VLAN | 2008 — 10.80.8.0/24 |
+| VM Network VLAN | 2009 — 10.80.9.0/24 |
+| Storage VLAN | 2010 — 10.80.10.0/24 |
+| Migration VLAN | 2011 — 10.80.11.0/24 |
+| Corosync VLAN | 2012 — 10.80.12.0/24 |
+| DNS / NTP | 10.80.0.5, 10.80.0.6 (AD DCs) |
+| Lab nodes | 210pve001, 210pve002, 210pve003 |
 
 ---
 
 ## License
 
-Internal tooling — LameServers use only.
+Internal tooling — ProbablyMonsters use only.

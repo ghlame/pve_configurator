@@ -395,6 +395,13 @@ class MainWindow(QMainWindow):
         self._storage_tab.set_inventory(inv)
         self._system_tab.set_inventory(inv)
         self._review_tab.set_inventory(inv)
+        # Apply host profile NIC roles to network tab, then auto-suggest
+        host_mgr = get_host_profile_manager()
+        profile = host_mgr.get(self._host_combo.currentText())
+        if profile:
+            roles_applied = self._network_tab.apply_host_profile(profile)
+            if roles_applied:
+                self._network_tab._auto_suggest()
         # Enable remaining tabs once we have inventory
         for i in range(2, self._tabs.count()):
             self._tabs.setTabEnabled(i, True)
@@ -511,6 +518,7 @@ class MainWindow(QMainWindow):
         profile = mgr.get(name)
         if profile:
             self._system_tab.apply_site_profile(profile)
+            self._storage_tab.apply_site_profile(profile)
             self._statusbar.showMessage(
                 f"Site: {profile.name}  ·  {profile.timezone}"
             )

@@ -719,6 +719,37 @@ class NetworkTab(QWidget):
         self._load_current_config(inv)
         self._refresh_preview()
 
+    def apply_host_profile(self, profile) -> bool:
+        """
+        Apply NIC role assignments from a host profile to the NIC panel.
+        Returns True if any roles were set (so caller can trigger auto-suggest).
+        Matches by name (exact) or speed ('1GbE', '10GbE') depending on match_by.
+        """
+        if not profile.nic_roles or not self._inventory:
+            return False
+
+        applied = False
+        for assignment in profile.nic_roles:
+            try:
+                role = NICRole(assignment.role)
+            except ValueError:
+                continue  # unknown role string, skip
+
+            if assignment.match_by == "name":
+                # Match by exact NIC name (e.g. "nic0", "nic1")
+                for nic in self._inventory.physical_nics:
+                    if nic.name == assignment.pattern:
+                        self._nic_panel.set_role(nic.name, role)
+                        applied = True
+            elif assignment.match_by == "speed":
+                # Match by speed label (e.g. "1GbE", "10GbE")
+                for nic in self._inventory.physical_nics:
+                    if nic.speed_label == assignment.pattern:
+                        self._nic_panel.set_role(nic.name, role)
+                        applied = True
+
+        return applied
+
     # ── UI ────────────────────────────────────────────────────────────────────
 
     def _build_ui(self):

@@ -84,9 +84,14 @@ class NICInfo:
 
     @property
     def suggested_role(self) -> NICRole:
-        """Heuristic role suggestion based on speed and state."""
+        """Heuristic role suggestion based on name and speed."""
         if self.is_wifi or self.is_virtual:
             return NICRole.EXCLUDE
+        # Name-based defaults for known home lab NIC naming
+        if self.name == "nic0":
+            return NICRole.STORAGE
+        if self.name == "nic1":
+            return NICRole.MANAGEMENT
         if self.speed_mbps is not None and self.speed_mbps >= 10000:
             return NICRole.VM_TRAFFIC
         if self.speed_mbps is not None and self.speed_mbps <= 1000:

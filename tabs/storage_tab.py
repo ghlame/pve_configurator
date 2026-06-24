@@ -670,6 +670,10 @@ class NFSPanel(QWidget):
     def shares(self) -> list[NFSShare]:
         return self._shares
 
+    def set_server(self, ip: str) -> None:
+        """Pre-populate the NAS IP field from a site profile."""
+        self._server_edit.setText(ip)
+
 
 # ── iSCSI shared storage panel ────────────────────────────────────────────────
 
@@ -974,6 +978,11 @@ class StorageTab(QWidget):
         self._disk_panel.populate(inv.disks)
         self._build_initial_configs(inv)
         self._refresh_preview()
+
+    def apply_site_profile(self, profile) -> None:
+        """Pre-populate NAS IP from site profile."""
+        if profile.nfs_server:
+            self._nfs_panel.set_server(profile.nfs_server)
 
     def set_connection(self, conn: PVEConnection):
         self._conn = conn

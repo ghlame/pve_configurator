@@ -36,6 +36,8 @@ class SiteProfile:
     # Networking
     mgmt_subnet: str = ""
     firewall_mgmt_cidr: str = ""
+    # Storage
+    nfs_server: str = ""
     # Monitoring
     loki_url: str = ""
     prometheus_url: str = ""
@@ -172,6 +174,7 @@ BUILTIN_SITE_PROFILES = [
         vlan_corosync=0,
         mgmt_subnet="10.0.0.0/21",
         firewall_mgmt_cidr="10.0.0.0/21",
+        nfs_server="10.0.10.7",
         notes="Home lab — flat network, Pi-hole DNS at 10.0.0.10 and 10.0.0.11",
         builtin=True,
     ),
