@@ -1,0 +1,5 @@
+PyQt6>=6.5
+proxmoxer>=2.0
+paramiko>=3.0
+requests>=2.31
+urllib3>=2.0

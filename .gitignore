@@ -1,0 +1,81 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+wheels/
+sdist/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Distribution / packaging
+*.tar.gz
+*.zip
+*.whl
+
+# PyInstaller
+*.spec
+dist/
+build/
+
+# Unit test / coverage
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+coverage.xml
+*.cover
+htmlcov/
+.pytest_cache/
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# PyQt / Qt
+*.pyc
+*.qmlc
+*.jsc
+
+# User config and saved profiles (machine-specific, not for source control)
+~/.config/pve-configurator/
+*.json.bak
+
+# Logs
+*.log
+apply_log_*.txt
+
+# Backup files created during apply
+*.bak.*
+interfaces.bak.*
+resolv.conf.bak.*
+chrony.conf.bak.*
+storage.cfg.bak.*
+
+# Temporary files
+/tmp/interfaces_desired
+*.tmp
+
+# Secrets — never commit these
+*.pem
+*.key
+*.crt
+id_rsa
+id_ed25519
+known_hosts
